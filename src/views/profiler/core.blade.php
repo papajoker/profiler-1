@@ -42,9 +42,14 @@
 			</div>
 				
 			@if (\Config::get('profiler::btns.config'))
-				<?php $countConfig=0; ?>
 			<div class="anbu-tab-pane anbu-table anbu-config">
 				@include('profiler::profiler._config')
+			</div>
+			@endif
+			
+			@if (\Config::get('profiler::btns.storage'))
+			<div class="anbu-tab-pane anbu-table anbu-storage">
+				@include('profiler::profiler._storage_logs')
 			</div>
 			@endif
 
@@ -80,6 +85,7 @@
             'file'=>        'count($includedFiles)',
             'view'=>        'count($view_data)',
             'session'=>     'count(\Session::all())',
+	    'storage'=>     'count($storageLogs)',
 	    'config'=>      'count($config)',
             'auth'=>        '""',
             'auth-sentry'=> 'Sentry::getUser()->email'

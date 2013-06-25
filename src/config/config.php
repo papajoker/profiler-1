@@ -20,7 +20,8 @@ return array(
             'file'=>        array('label'=>'FILES'),
             'view'=>        array('label'=>'VIEW'),
             'session'=>     array('label'=>'SESSION'),
-            //'config'=>     array('label'=>'CONFIG'),
+            'config'=>     array('label'=>'CONFIG'),
+            'storage'=>      array('label'=>'LOGS'),
             'auth'=>        array('label'=>'AUTH'),
             'auth-sentry'=> array('label'=>'AUTH')
         ),
