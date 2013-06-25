@@ -40,6 +40,13 @@
 			<div class="anbu-tab-pane anbu-table anbu-session">
 				@include('profiler::profiler._session')
 			</div>
+				
+			@if (\Config::get('profiler::btns.config'))
+				<?php $countConfig=0; ?>
+			<div class="anbu-tab-pane anbu-table anbu-config">
+				@include('profiler::profiler._config')
+			</div>
+			@endif
 
 			@if (Auth::check())
 				<div class="anbu-tab-pane anbu-table anbu-auth">
@@ -57,8 +64,8 @@
 	</div>
 
 	<ul id="anbu-open-tabs" class="anbu-tabs">
-	@if (Config::get('profiler::doc'))
-	<a href="{{Config::get('profiler::doc')}}" class="doc" target="doc">&nbsp;</a>
+	@if (\Config::get('profiler::doc'))
+	<a href="{{\Config::get('profiler::doc')}}" class="doc" target="doc">&nbsp;</a>
 	@endif
 		
 <?php
@@ -73,6 +80,7 @@
             'file'=>        'count($includedFiles)',
             'view'=>        'count($view_data)',
             'session'=>     'count(\Session::all())',
+	    'config'=>      'count($config)',
             'auth'=>        '""',
             'auth-sentry'=> 'Sentry::getUser()->email'
         );
@@ -92,25 +100,6 @@
 	}
 ?>
 			
-
-<!--		
-		<li><a data-anbu-tab="anbu-environment" class="anbu-tab" href="#">Env <span class="anbu-count">{{ App::environment() }}</span></a></li>
-		<li><a data-anbu-tab="anbu-controller" 	class="anbu-tab" href="#">Controller <span class="anbu-count">{{ Route::currentRouteAction() }}</span></a></li>
-		<li><a data-anbu-tab="anbu-routes" 	class="anbu-tab" href="#">Routes <span class="anbu-count">{{ count(Route::getRoutes()) }}</span></a></li>
-		<li><a data-anbu-tab="anbu-log" 	class="anbu-tab" href="#">Log <span class="anbu-count">{{ count($app_logs) }}</span></a></li>
-		<li><a data-anbu-tab="anbu-sql" 	class="anbu-tab" href="#">SQL <span class="anbu-count">{{ count($sql_log) }}</span></a></li>
-		<li><a data-anbu-tab="anbu-checkpoints"	class="anbu-tab">Time <span class="anbu-count">{{ round($times['total'], 3) }} s</span></a></li>
-		<li><a 					class="anbu-tab">Memory <span class="anbu-count">{{ Profiler::getMemoryUsage() }}</span></a></li>
-		<li><a data-anbu-tab="anbu-file" 	class="anbu-tab">Files <span class="anbu-count">{{ count($includedFiles) }}</span></a></li>
-		<li><a data-anbu-tab="anbu-view" 	class="anbu-tab">View <span class="anbu-count">{{ count($view_data) }}</span></a></li>
-		<li><a data-anbu-tab="anbu-session"	class="anbu-tab">Session <span class="anbu-count">{{ count(Session::all()) }}</span></a></li>
-		@if (Auth::check())
-			<li><a class="anbu-tab" data-anbu-tab="anbu-auth">Auth</a></li>
-		@endif
-		@if (class_exists('Cartalyst\Sentry\SentryServiceProvider') AND Sentry::check())
-			<li><a class="anbu-tab" data-anbu-tab="anbu-auth-sentry">Auth <span class="anbu-count">{{ Sentry::getUser()->email }}</span></a></li>
-		@endif
--->
 		<li class="anbu-tab-right"><a id="anbu-hide" href="#">&#8614;</a></li>
 		<li class="anbu-tab-right"><a id="anbu-close" href="#">&times;</a></li>
 		<li class="anbu-tab-right"><a id="anbu-zoom" href="#">&#8645;</a></li>

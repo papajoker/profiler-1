@@ -93,9 +93,40 @@ class Profiler {
 
 		'assetPath' => __DIR__.'/../../assets/',
             );
+	    if (\Config::get('profiler::btns.config'))
+		$data['config'] = $this->getConfig();
 
             return \View::make('profiler::profiler.core', $data);
         }
+    }
+    
+    /**
+     * list all lines in Configs laravel
+     *
+     * @return Array
+     */
+    public function getConfig()
+    {
+    	$configs = \Config::getItems() ;
+	$config = array();
+	foreach($configs as $a=>$b){
+	    $this->devConfig($b,$a,$config);
+	}
+	return $config;
+    }
+    
+    /**
+     * format line for Array Config
+     */
+    private function devConfig($a,$prefix,&$config)
+    {
+	if (!is_array($a)) {
+	    $config[$prefix]=$a;
+	}
+	else
+	    foreach($a as $aa=>$b){
+		$this->devConfig($b,$prefix.'.'.$aa,$config);
+	    }
     }
 
     /**
@@ -130,7 +161,7 @@ class Profiler {
     /**
      * Breaks bytes into larger chunks (e.g. B => MB)
      *
-     * @param strng $bytes
+     * @param sting $bytes
      * @return string
      */
     protected function formatBytes($bytes)
