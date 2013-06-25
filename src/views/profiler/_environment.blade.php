@@ -11,5 +11,9 @@
 		<td>Locale</td>
 		<td>{{ Config::get('app.locale') }}</td>
 	</tr>
+	<tr>
+		<td>Php</td>
+		<td>{{ phpversion() }}</td>
+	</tr>
 </table>
 
