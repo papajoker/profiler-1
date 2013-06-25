@@ -65,6 +65,8 @@
 	transition-duration: 0.7s, 0.2s;
 	transition-timing-function: ease-in, ease-in;
 }
+.anbu-tabs a.doc { width: 40px;  } 
+.anbu-tabs a.doc:hover { background-color: transparent !important; } 
 
 #anbu-closed-tabs a, #anbu-closed-tabs a:visited {
 	padding: 0.85em 1.2em 0.85em 1.2em !important;

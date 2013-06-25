@@ -57,6 +57,9 @@
 	</div>
 
 	<ul id="anbu-open-tabs" class="anbu-tabs">
+	@if (Config::get('profiler::doc'))
+	<a href="{{Config::get('profiler::doc')}}" class="doc" target="doc">&nbsp;</a>
+	@endif
 		
 <?php
 	$actions= array(

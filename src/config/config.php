@@ -9,8 +9,7 @@ return array(
     'profiler' => TRUE,
     
         // order - desable button
-    'btns'=>
-        array(
+    'btns' => array(
             'environment'=> array('label'=>''),
             'memory'=>      array('label'=>''),
             'controller'=>  array('label'=>'CTRL'),
@@ -23,5 +22,6 @@ return array(
             'session'=>     array('label'=>'SESSION'),
             'auth'=>        array('label'=>'AUTH'),
             'auth-sentry'=> array('label'=>'AUTH')
-        )  
+        ),
+    'doc' => 'http://www.laravel.fr/docs/'
 );
