@@ -6,5 +6,22 @@ return array(
     'jquery' => FALSE,
     
 	// Set to true to enable profiling, false to disable
-    'profiler' => TRUE
+    'profiler' => TRUE,
+    
+        // order - desable button
+    'btns'=>
+        array(
+            'environment'=> array('label'=>''),
+            'memory'=>      array('label'=>''),
+            'controller'=>  array('label'=>'CTRL'),
+            'routes'=>      array('label'=>'ROUTES'),
+            'log'=>         array('label'=>'LOG'),
+            'sql'=>         array('label'=>'SQL'),
+            'checkpoints'=> array('label'=>'TIME'),
+            'file'=>        array('label'=>'FILES'),
+            'view'=>        array('label'=>'VIEW'),
+            'session'=>     array('label'=>'SESSION'),
+            'auth'=>        array('label'=>'AUTH'),
+            'auth-sentry'=> array('label'=>'AUTH')
+        )  
 );

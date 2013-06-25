@@ -91,7 +91,7 @@ class Profiler {
                 'app_logs'	=> $this->logs,
                 'includedFiles'	=> get_included_files(),
 
-				'assetPath' => __DIR__.'/../../assets/',
+		'assetPath' => __DIR__.'/../../assets/',
             );
 
             return \View::make('profiler::profiler.core', $data);
