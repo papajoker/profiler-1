@@ -10,9 +10,9 @@ return array(
     
         // order - desable button
     'btns' => array(
-            'environment'=> array('label'=>''),
-            'memory'=>      array('label'=>''),
-            'controller'=>  array('label'=>'CTRL'),
+            'environment'=> array('label'=>'','title'=>'Environment'),
+            'memory'=>      array('label'=>'','title'=>'Memory'),
+            'controller'=>  array('label'=>'CTRL','title'=>'Controller'),
             'routes'=>      array('label'=>'ROUTES'),
             'log'=>         array('label'=>'LOG'),
             'sql'=>         array('label'=>'SQL'),
@@ -21,7 +21,7 @@ return array(
             'view'=>        array('label'=>'VIEW'),
             'session'=>     array('label'=>'SESSION'),
             'config'=>     array('label'=>'CONFIG'),
-            'storage'=>      array('label'=>'LOGS'),
+            'storage'=>      array('label'=>'LOGS','title'=>'Logs in storage'),
             'auth'=>        array('label'=>'AUTH'),
             'auth-sentry'=> array('label'=>'AUTH')
         ),

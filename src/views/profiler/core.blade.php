@@ -100,7 +100,7 @@
 			$count='';
 		}
 		echo	'<li><a data-anbu-tab="anbu-'.$key.'" class="anbu-tab"
-				href="#">'.$btn['label'].
+				href="#" title="'.((isset($btn['title']))?$btn['title']:$btn['label']).'">'.$btn['label'].
 				' <span class="anbu-count">'.$count.'</span></a>'.
 			'</li>';
 	}
