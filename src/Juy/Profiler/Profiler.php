@@ -169,7 +169,7 @@ class Profiler {
  
 	unset($headings);
 	unset($log_data);
-	$log = array_reverse(  array_slice($log, 0, $max) );//news to old and 24 max
+	$log = array_slice( array_reverse($log), 0, $max);//news to old and 24 max
 	return $log;
     }
     
