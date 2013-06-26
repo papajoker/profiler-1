@@ -74,33 +74,17 @@
 	@endif
 		
 <?php
-	$actions= array(
-            'environment'=> '\App::environment()',
-            'memory'=>      'Profiler::getMemoryUsage()',
-            'controller'=>  '\Route::currentRouteAction()',
-            'routes'=>      'count(\Route::getRoutes())',
-            'log'=>         'count($app_logs)',
-            'sql'=>         'count($sql_log)',
-            'checkpoints'=> 'round($times["total"], 3)',
-            'file'=>        'count($includedFiles)',
-            'view'=>        'count($view_data)',
-            'session'=>     'count(\Session::all())',
-	    'storage'=>     'count($storageLogs)',
-	    'config'=>      'count($config)',
-            'auth'=>        '""',
-            'auth-sentry'=> 'Sentry::getUser()->email'
-        );
 	$btns=\Config::get('profiler::btns');
 	foreach ($btns as $key=>$btn) {
 	    if (($key=='auth') && (!Auth::check())) continue;
 	    if (($key=='auth-sentry') && !(class_exists('Cartalyst\Sentry\SentryServiceProvider') AND Sentry::check())  ) continue;
 		try {
-			eval('$count='.$actions[$key].';');
+			eval('$count='.$counts[$key].';');
 		} catch (Exception $e) {
 			$count='';
 		}
-		echo	'<li><a data-anbu-tab="anbu-'.$key.'" class="anbu-tab"
-				href="#" title="'.((isset($btn['title']))?$btn['title']:$btn['label']).'">'.$btn['label'].
+		echo	'<li><a data-anbu-tab="anbu-'.$key.'" class="anbu-tab" href="#"
+				title="'.((isset($btn['title']))?$btn['title']:$btn['label']).'">'.$btn['label'].
 				' <span class="anbu-count">'.$count.'</span></a>'.
 			'</li>';
 	}

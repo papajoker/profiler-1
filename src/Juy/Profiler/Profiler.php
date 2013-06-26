@@ -90,7 +90,7 @@ class Profiler {
                 'sql_log'	=> array_reverse(\DB::getQueryLog()),
                 'app_logs'	=> $this->logs,
                 'includedFiles'	=> get_included_files(),
-
+		'counts'	=> $this->getCounts(),
 		'assetPath' => __DIR__.'/../../assets/',
             );
 	    if (\Config::get('profiler::btns.storage'))
@@ -100,6 +100,31 @@ class Profiler {
 
             return \View::make('profiler::profiler.core', $data);
         }
+    }
+    
+    /**
+     * return all scripts for btn count
+     *
+     * @return Array
+     */
+    private function getCounts()
+    {
+	return array(
+            'environment'=> '\App::environment()',
+            'memory'=>      'Profiler::getMemoryUsage()',
+            'controller'=>  '\Route::currentRouteAction()',
+            'routes'=>      'count(\Route::getRoutes())',
+            'log'=>         'count($app_logs)',
+            'sql'=>         'count($sql_log)',
+            'checkpoints'=> 'round($times["total"], 3)',
+            'file'=>        'count($includedFiles)',
+            'view'=>        'count($view_data)',
+            'session'=>     'count(\Session::all())',
+	    'storage'=>     'count($storageLogs)',
+	    'config'=>      'count($config)',
+            'auth'=>        '""',
+            'auth-sentry'=> 'Sentry::getUser()->email',
+        );
     }
     
     /**
