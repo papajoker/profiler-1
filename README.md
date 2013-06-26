@@ -47,7 +47,7 @@ If you wish to disable the profiler during your application, just do:
 
     Config::set('profiler::profiler', false);
     
-you can order,disable and set label ans title
+you can order,disable and set label and title
 
     'btns' => array(
             'environment'=> array('label'=>'','title'=>'Environment'),
