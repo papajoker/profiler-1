@@ -8,7 +8,7 @@ return array(
 	// Set to true to enable profiling, false to disable
     'profiler' => TRUE,
     
-        // order - desable button
+        // order - disable button
     'btns' => array(
             'environment'=> array('label'=>'','title'=>'Environment'),
             'memory'=>      array('label'=>'','title'=>'Memory'),

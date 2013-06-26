@@ -46,6 +46,29 @@ Set this option to *false* to disable the profiler. It is `true` by default.
 If you wish to disable the profiler during your application, just do:
 
     Config::set('profiler::profiler', false);
+    
+you can order,disable and set label ans title
+
+    'btns' => array(
+            'environment'=> array('label'=>'','title'=>'Environment'),
+            'memory'=>      array('label'=>'','title'=>'Memory'),
+            'controller'=>  array('label'=>'CTRL','title'=>'Controller'),
+            'routes'=>      array('label'=>'ROUTE'),
+            'log'=>         array('label'=>'LOG'),
+            'sql'=>         array('label'=>'SQL'),
+            'checkpoints'=> array('label'=>'TIME'),
+            'file'=>        array('label'=>'FILES'),
+            'view'=>        array('label'=>'VIEW'),
+            'session'=>     array('label'=>'SESSION'),
+            //'config'=>      array('label'=>'CONFIG'),
+            'storage'=>      array('label'=>'LOGS','title'=>'Logs in storage'),
+            'auth'=>        array('label'=>'AUTH'),
+            'auth-sentry'=> array('label'=>'AUTH')
+        ),
+        
+Add a link on your favorite doc
+
+    'doc'=>'http://laravel.com/docs'
 
 >**Note::** This will only disable the output, it will still do it's background listening but will not output it to the browser.
 
