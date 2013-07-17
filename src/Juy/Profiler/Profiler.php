@@ -94,9 +94,9 @@ class Profiler {
 		'assetPath' => __DIR__.'/../../assets/',
             );
 	    if (\Config::get('profiler::btns.storage'))
-		$data['storageLogs'] = $this->getStorageLogs(24);
+			$data['storageLogs'] = $this->getStorageLogs(24);
 	    if (\Config::get('profiler::btns.config'))
-		$data['config'] = $this->getConfig();
+			$data['config'] = array_dot(\Config::getItems());
 
             return \View::make('profiler::profiler.core', $data);
         }
@@ -109,21 +109,21 @@ class Profiler {
      */
     private function getCounts()
     {
-	return array(
-            'environment'=> '\App::environment()',
-            'memory'=>      'Profiler::getMemoryUsage()',
-            'controller'=>  '\Route::currentRouteAction()',
-            'routes'=>      'count(\Route::getRoutes())',
-            'log'=>         'count($app_logs)',
-            'sql'=>         'count($sql_log)',
-            'checkpoints'=> 'round($times["total"], 3)',
-            'file'=>        'count($includedFiles)',
-            'view'=>        'count($view_data)',
-            'session'=>     'count(\Session::all())',
-	    'storage'=>     'count($storageLogs)',
-	    'config'=>      'count($config)',
-            'auth'=>        '""',
-            'auth-sentry'=> 'Sentry::getUser()->email',
+		return array(
+            'environment'=> function(){ return \App::environment(); },
+            'memory'=>      function(){ return Profiler::getMemoryUsage(); },
+            'controller'=>  function(){ return \Route::currentRouteAction(); },
+            'routes'=>      function(){ return count(\Route::getRoutes()); },
+            'log'=>         function($app_logs){ return count($app_logs); },
+            'sql'=>         function($sql_log){ return count($sql_log); },
+            'checkpoints'=> function($times){ return round($times['total'], 3); },
+            'file'=>        function($includedFiles){ return count($includedFiles); },
+            'view'=>        function($view_data){ return count($view_data); },
+            'session'=>     function(){ return count(\Session::all()); },
+			'storage'=>     function($storageLogs){ return count($storageLogs); },
+			'config'=>    	function($config){ return count($config); },
+            'auth'=>        function() { return ''; },
+            'auth-sentry'=> function() { \Sentry::getUser()->email; },
         );
     }
     
@@ -173,34 +173,6 @@ class Profiler {
 	return $log;
     }
     
-    /**
-     * list all lines in Configs laravel
-     *
-     * @return Array
-     */
-    public function getConfig()
-    {
-    	$configs = \Config::getItems() ;
-	$config = array();
-	foreach($configs as $a=>$b){
-	    $this->devConfig($b,$a,$config);
-	}
-	return $config;
-    }
-    
-    /**
-     * format line for Array Config
-     */
-    private function devConfig($a,$prefix,&$config)
-    {
-	if (!is_array($a)) {
-	    $config[$prefix]=$a;
-	}
-	else
-	    foreach($a as $aa=>$b){
-		$this->devConfig($b,$prefix.'.'.$aa,$config);
-	    }
-    }
 
     /**
      * Cleans an entire array (escapes HTML)
